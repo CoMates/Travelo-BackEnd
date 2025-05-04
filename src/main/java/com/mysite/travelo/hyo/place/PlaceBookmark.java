@@ -18,8 +18,10 @@ public class PlaceBookmark {
     private int placeBookmarkSeq;
 
     @ManyToOne
+    @JoinColumn(name = "userSeq")
     private SiteUser user;
 
     @ManyToOne
+    @JoinColumn(name = "placeSeq")
     private Place place;
 }

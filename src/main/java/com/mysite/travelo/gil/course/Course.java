@@ -8,14 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mysite.travelo.gil.review.Review;
 import com.mysite.travelo.yeon.user.SiteUser;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,6 +22,7 @@ public class Course {
 	private Integer courseSeq; // 코스 순차번호
 	
 	@ManyToOne
+	@JoinColumn(name = "userSeq", nullable = false)
 	private SiteUser author; // userSeq(회원 순차번호) 참조
 	
 	@Column(nullable = false, columnDefinition = "CHAR(2)")
