@@ -36,7 +36,7 @@ public class ReviewController {
 
 //	댓글 작성
 	@PreAuthorize("isAuthenticated()")
-	@PostMapping("create/{courseSeq}")
+	@PostMapping("/create/{courseSeq}")
 	public ResponseEntity<?> create(Authentication auth,
 											@PathVariable("courseSeq") Integer courseSeq,
 											@Valid @RequestBody ReviewForm reviewForm,
