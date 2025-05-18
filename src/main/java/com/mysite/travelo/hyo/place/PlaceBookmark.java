@@ -21,7 +21,8 @@ public class PlaceBookmark {
     @JoinColumn(name = "userSeq")
     private SiteUser user;
 
-    @ManyToOne
-    @JoinColumn(name = "placeSeq")
-    private Place place;
+    private String contentId;
+//    @ManyToOne
+//    @JoinColumn(name = "placeSeq")
+//    private Place place;
 }

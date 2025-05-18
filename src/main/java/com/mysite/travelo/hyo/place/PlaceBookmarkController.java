@@ -42,24 +42,24 @@ public class PlaceBookmarkController {
     // 북마크 추가
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/add")
-    public ResponseEntity<Map<String, Object>> addBookmark(Authentication auth, @RequestParam int placeSeq) {
+    public ResponseEntity<Map<String, Object>> addBookmark(Authentication auth, @RequestParam String contentId) {
         Map<String, Object> response;
         
         SiteUser loginUser = userService.getLoginUserByUsername(auth.getName());
         
-        response = placeBookmarkService.addBookmark(loginUser, placeSeq);
+        response = placeBookmarkService.addBookmark(loginUser, contentId);
         return ResponseEntity.ok(response);
     }
 
     // 북마크 삭제
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/remove")
-    public ResponseEntity<?> removeBookmark(Authentication auth, @RequestParam int placeSeq) {
+    public ResponseEntity<?> removeBookmark(Authentication auth, @RequestParam String contentId) {
         Map<String, Object> response;
         
         SiteUser loginUser = userService.getLoginUserByUsername(auth.getName());
         
-        response = placeBookmarkService.removeBookmark(loginUser, placeSeq);
+        response = placeBookmarkService.removeBookmark(loginUser, contentId);
         return ResponseEntity.ok(response);
     }
 

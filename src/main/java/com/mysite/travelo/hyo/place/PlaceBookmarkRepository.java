@@ -10,8 +10,8 @@ import java.util.Set;
 
 
 public interface PlaceBookmarkRepository extends JpaRepository<PlaceBookmark, Integer> {
-    boolean existsByUserAndPlace(SiteUser user, Place place);
-    void deleteByUserAndPlace(SiteUser user, Place place);
+    boolean existsByUserAndContentId(SiteUser user, String contentId);
+    void deleteByUserAndContentId(SiteUser user, String contentId);
     List<PlaceBookmark> findByUser(SiteUser user);
 
 

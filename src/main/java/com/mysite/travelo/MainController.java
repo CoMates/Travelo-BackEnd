@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mysite.travelo.hyo.place.PlaceLike;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mysite.travelo.gil.course.Course;
 import com.mysite.travelo.gil.course.CourseService;
-import com.mysite.travelo.hyo.place.Place;
 import com.mysite.travelo.hyo.place.PlaceService;
 import com.mysite.travelo.yeon.user.SiteUser;
 import com.mysite.travelo.yeon.user.UserService;
@@ -55,11 +55,11 @@ public class MainController {
 		
 		response.put("areaCodes", areaCodes);
 		
-		List<Place> places = placeService.findPopularPlaces();
+		List<String> places = placeService.findPopularPlaces();
 		if (places == null) {
 			return new ResponseEntity<>("장소가 없습니다", HttpStatus.NOT_FOUND);
 		}
-		
+
 		response.put("places", places);
 		
 		List<Course> courses = courseService.findPopularCourses();

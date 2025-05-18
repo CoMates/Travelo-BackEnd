@@ -39,17 +39,19 @@ public class CourseService {
         }
         
 //      코스 목록
-        if (areaCode != null && !areaCode.isEmpty() && type != null && !type.isEmpty()) {
-        	// 지역과 장소유형 둘 다 존재하는 경우 해당 장소유형의 장소가 포함된 해당 지역의 코스를 반환
-            return courseRepository.findAllByPrivateYnAndAreaCodeAndCourseListPlaceType(privateYn, areaCode, type, pageable);
-            
-        } else if (areaCode != null && !areaCode.isEmpty()) {
+        if
+//		(areaCode != null && !areaCode.isEmpty() && type != null && !type.isEmpty()) {
+//        	// 지역과 장소유형 둘 다 존재하는 경우 해당 장소유형의 장소가 포함된 해당 지역의 코스를 반환
+//            return courseRepository.findAllByPrivateYnAndAreaCodeAndCourseListPlaceType(privateYn, areaCode, type, pageable);
+//
+//        } else if
+		(areaCode != null && !areaCode.isEmpty()) {
         	// 지역만 존재하는 경우 해당 지역의 코스를 반환
         	return courseRepository.findAllByPrivateYnAndAreaCode(privateYn, areaCode, pageable);
         	
-        } else if (type != null && !type.isEmpty()) {
-        	// 장소유형만 존재하는 경우 해당 유형의 장소가 포함된 코스를 반환
-        	return courseRepository.findAllByPrivateYnAndCourseListPlaceType(privateYn, type, pageable);
+//        } else if (type != null && !type.isEmpty()) {
+//        	// 장소유형만 존재하는 경우 해당 유형의 장소가 포함된 코스를 반환
+//        	return courseRepository.findAllByPrivateYnAndCourseListPlaceType(privateYn, type, pageable);
         	
         } else {
         	// 그렇지 않은 경우 필터링 되지 않은 모든 코스를 반환
