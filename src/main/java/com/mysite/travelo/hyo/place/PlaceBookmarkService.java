@@ -30,21 +30,19 @@ import java.util.*;
 @Service
 public class PlaceBookmarkService {
 
-    private final PlaceRepository placeRepository;
     private final PlaceBookmarkRepository placeBookmarkRepository;
 
     // 북마크 추가
     @Transactional
-    public Map<String, Object> addBookmark (SiteUser user, int placeSeq){
-        Place place = placeRepository.findById(placeSeq);
+    public Map<String, Object> addBookmark (SiteUser user, String contentId){
 
         Map<String, Object> response = new HashMap<>();
 
         // 이미 북마크한 내용인 경우를 판단.
-        if(!placeBookmarkRepository.existsByUserAndPlace(user,place)){
+        if(!placeBookmarkRepository.existsByUserAndContentId(user,contentId)){
             PlaceBookmark placeBookmark = new PlaceBookmark();
             placeBookmark.setUser(user);
-            placeBookmark.setPlace(place);
+            placeBookmark.setContentId(contentId);
             placeBookmarkRepository.save(placeBookmark);
             response.put("message", "북마크에 성공적으로 저장했습니다.");
         } else {
@@ -55,14 +53,13 @@ public class PlaceBookmarkService {
 
     // 북마크 내용 삭제
     @Transactional
-    public Map<String, Object> removeBookmark(SiteUser user, int placeSeq) {
-        Place place = placeRepository.findById(placeSeq);
+    public Map<String, Object> removeBookmark(SiteUser user, String contentId) {
 
         Map<String, Object> response = new HashMap<>();
 
         // 북마크의 존재여부 확인.
-        if (placeBookmarkRepository.existsByUserAndPlace(user, place)) {
-            placeBookmarkRepository.deleteByUserAndPlace(user, place);
+        if (placeBookmarkRepository.existsByUserAndContentId(user, contentId)) {
+            placeBookmarkRepository.deleteByUserAndContentId(user, contentId);
             response.put("message", "성공적으로 삭제했습니다.");
         } else {
             response.put("message", "처리 과정에서 문제가 발생했습니다. 내용이 존재하지 않습니다.");

@@ -1,16 +1,13 @@
 package com.mysite.travelo.gil.course;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.mysite.travelo.hyo.place.Place;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,8 +27,8 @@ public class CourseList {
 	
 	// member는 비식별로 명시하지는 않았지만 course에서 가져옴
 	
-	@ManyToOne
-	@JoinColumn(name = "placeSeq")
-	private Place place;
+//	@ManyToOne
+//	@JoinColumn(name = "placeSeq")
+	private String contentId;
 
 }

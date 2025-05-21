@@ -5,7 +5,6 @@ import com.mysite.travelo.gil.course.CourseBookmarkService;
 import com.mysite.travelo.gil.course.CourseLikeService;
 import com.mysite.travelo.gil.course.CourseRepository;
 import com.mysite.travelo.gil.course.CourseService;
-import com.mysite.travelo.hyo.place.Place;
 import com.mysite.travelo.yeon.group.CourseGroupListService;
 import com.mysite.travelo.yeon.group.CourseGroupService;
 import com.mysite.travelo.yeon.user.SiteUser;
@@ -50,11 +49,11 @@ public class CourseCustomController {
         SiteUser loginUser = userService.getLoginUserByUsername(auth.getName());
 
         // 장소 개수 검증
-        if(request.getPlaceSeqs().isEmpty()) {
+        if(request.getContentIdList().isEmpty()) {
             response.put("lacksPlace","장소를 하나 이상 추가해주십시오.");
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-        if(request.getPlaceSeqs().size() > 6) {
+        if(request.getContentIdList().size() > 6) {
             response.put("overPlace", "장소는 최대 6개까지 추가할 수 있습니다.");
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
@@ -152,33 +151,6 @@ public class CourseCustomController {
 		courseBookmarkService.delete(course);
 		courseGroupListService.delete(course);
         response = courseCustomService.deleteCourse(courseSeq, response);
-
-        return ResponseEntity.ok(response);
-    }
-
-    // Map에 꽂을 핀
-    @PreAuthorize("isAuthenticated()")
-    @PostMapping("/mappin")
-    public ResponseEntity<Map<String, Object>> mappinCourse(Authentication auth, @Valid @RequestBody List<Place> placeList, BindingResult bindingResult){
-
-        Map<String, Object> response = new HashMap<>();
-        
-        SiteUser loginUser = userService.getLoginUserByUsername(auth.getName());
-        
-        response.put("loginUser", loginUser);
-
-        response = bindingResultError(bindingResult);
-        if(response.containsKey("error")){
-            return ResponseEntity.badRequest().body(response);
-        }
-
-        //결과 여부 반환.
-        response = courseCustomService.mappin(placeList);
-
-        // 결과 여부에 에러가 존재할 시,
-        if(response.containsKey("error")){
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
 
         return ResponseEntity.ok(response);
     }

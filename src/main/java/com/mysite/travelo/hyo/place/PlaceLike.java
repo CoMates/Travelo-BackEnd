@@ -25,9 +25,7 @@ public class PlaceLike {
 	@JoinColumn(name="userSeq")
 	private SiteUser author; // userSeq(회원 순차번호) 참조
 	
-	@ManyToOne
-	@JoinColumn(name="placeSeq")
-	private Place place; // placeSeq(장소 순차번호) 참조
+	private String contentId; 
 	
 	@Column(nullable = false, columnDefinition = "CHAR(1) default 'N'")
 	private String likeYn; // 장소의 좋아요 여부

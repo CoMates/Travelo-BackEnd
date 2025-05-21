@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mysite.travelo.gil.course.Course;
 import com.mysite.travelo.gil.course.CourseService;
-import com.mysite.travelo.hyo.place.Place;
+import com.mysite.travelo.hyo.place.PlaceLike;
 import com.mysite.travelo.hyo.place.PlaceService;
 import com.mysite.travelo.yeon.user.SiteUser;
 import com.mysite.travelo.yeon.user.UserService;
@@ -55,12 +55,9 @@ public class MainController {
 		
 		response.put("areaCodes", areaCodes);
 		
-		List<Place> places = placeService.findPopularPlaces();
-		if (places == null) {
-			return new ResponseEntity<>("장소가 없습니다", HttpStatus.NOT_FOUND);
-		}
+		List<String> placelikes = placeService.findPopularPlaces();
 		
-		response.put("places", places);
+		response.put("places", placelikes);
 		
 		List<Course> courses = courseService.findPopularCourses();
 		if (courses == null) {

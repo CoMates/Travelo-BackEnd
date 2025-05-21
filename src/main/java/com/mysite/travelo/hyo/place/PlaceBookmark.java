@@ -20,6 +20,5 @@ public class PlaceBookmark {
     @ManyToOne
     private SiteUser user;
 
-    @ManyToOne
-    private Place place;
+    private String contentId;
 }
