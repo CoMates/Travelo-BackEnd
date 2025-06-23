@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.mysite.travelo.yeon.user.SiteUser;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /* *
@@ -88,6 +89,13 @@ public class PlaceService {
     	Pageable pageable = PageRequest.of(0, 6);
     	
     	return placeLikeRepository.findTopContentIds(pageable);
+    	
+    }
+    
+    // 좋아요 목록
+    public List<Map<String, Integer>> countLikesGroupedByContentId() {
+    	
+    	return placeLikeRepository.countLikesGroupedByContentId();
     	
     }
 

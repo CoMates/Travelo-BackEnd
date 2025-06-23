@@ -1,6 +1,7 @@
 package com.mysite.travelo.hyo.place;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,13 @@ public interface PlaceLikeRepository extends JpaRepository<PlaceLike, Integer> {
 		       "GROUP BY pl.contentId " +
 		       "ORDER BY COUNT(pl) DESC")
 	List<String> findTopContentIds(Pageable pageable);
+	
+	@Query(value = """
+		    SELECT content_id, COUNT(*) as like_count
+		    FROM place_like
+		    WHERE like_yn = 'Y'
+		    GROUP BY content_id
+		""", nativeQuery = true)
+	List<Map<String, Integer>> countLikesGroupedByContentId();
+
 }

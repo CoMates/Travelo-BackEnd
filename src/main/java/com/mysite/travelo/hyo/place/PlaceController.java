@@ -1,6 +1,11 @@
 package com.mysite.travelo.hyo.place;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -58,6 +63,17 @@ public class PlaceController {
 	     String likeYn = placeService.togglePlaceLike(contentId, loginUser);
 	     
 	     return new ResponseEntity<>(likeYn, HttpStatus.OK);
- }
+    }
+    
+    @GetMapping("/travelo/placeLikeCount")
+    public ResponseEntity<Map<String, Object>> likeCount() {
+    	
+    	Map<String, Object> response = new HashMap<>();
+    	
+    	List<Map<String, Integer>> likes = placeService.countLikesGroupedByContentId();
+    	response.put("likeCount", likes);
+        
+    	return ResponseEntity.ok(response);
+    }
 
 }
